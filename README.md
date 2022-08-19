@@ -5,7 +5,7 @@ Alumno: John Edson Sanchez Chilo
 **Estilos de Programacion aplicados**  
   
 Estilo #1:  Code-golf  
-
+Direccion: 
 ```
 @app.route("/")  
 def main():  
@@ -13,7 +13,7 @@ def main():
 ```
 
 Estilo #2:  CookBook
-
+Direccion: 
 ```
 $.each(solicitudObj,function(index,value){
     solicitud=$(div).clone();
@@ -24,8 +24,8 @@ $.each(solicitudObj,function(index,value){
  });
 ```
 
-Estilo #3: Persistent Tables
-
+Estilo #3: Persistent Tables  
+Direccion: Blogex/Controller/CoordinadorControlador.py
 
 ```
 def getSolicitud():
