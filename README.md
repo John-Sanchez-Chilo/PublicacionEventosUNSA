@@ -9,7 +9,7 @@ Direccion: blogex/Controller/CoordinadorControlador.py
 ```
 @app.route("/")  
 def main():  
-    return render_template('indexCoord.html') 
+    return render_template('coordinadorHome.html') 
 ```
 
 Estilo #2:  CookBook
