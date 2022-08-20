@@ -62,11 +62,10 @@ Practica #3: Esquema de Nomeclatura Coherente
 @app.route('/get_solicitud')
 def get_solicitud():
 ```
+  
+```
 def convertir_a_evento(self,encargado):
   ...
-```
-@app.route('/get_solicitud')
-def get_solicitud():
 ```
 Practica #4: Longitud de Linea Límite  
 
