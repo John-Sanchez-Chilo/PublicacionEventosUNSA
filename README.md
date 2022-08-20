@@ -39,7 +39,7 @@ def get_solicitud():
 
 **Practicas de Clean Code Aplicadas**  
 Practica #1: Comentar y documentar
-Dirección: blogex
+
 ```
     #funcion para pasar una propuesta aceptada a un evento ascociando al encargado
     def convertir_a_evento(self,encargado):
@@ -47,7 +47,7 @@ Dirección: blogex
         return evento
 ```
 Practica #2: Identación Consistente
-Dirección: 
+
 ```
 class Propuesta(object):
     def __init__(self,id_propuesta=None, titulo=None, descripcion=None, tema=None,):
@@ -57,13 +57,19 @@ class Propuesta(object):
         self.tema = tema
 ```
 Practica #3: Esquema de Nomeclatura Coherente
-Dirección:
+
 ```
 @app.route('/get_solicitud')
 def get_solicitud():
 ```
+def convertir_a_evento(self,encargado):
+  ...
+```
+@app.route('/get_solicitud')
+def get_solicitud():
+```
+Practica #4: Longitud de Linea Límite  
 
-Practica #4: Longitud de Linea Límite
 ```
 //bad
 function(res){
@@ -87,8 +93,8 @@ var solicitud = '';
 });
 ```
 
-Practica #5: Poner MAYUSCULAS las palabras reservadas de SQL
-Dirección:
+Practica #5: Poner MAYUSCULAS las palabras reservadas de SQL  
+
 ```
 def get_solicitud():
     if session.get('user'):
