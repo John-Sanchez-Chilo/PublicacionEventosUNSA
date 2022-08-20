@@ -28,7 +28,7 @@ Estilo #3: Persistent Tables
 Direccion: blogex/Controller/CoordinadorControlador.py
 
 ```
-def getSolicitud():
+def get_solicitud():
     if session.get('user'):
         _user = session.get('user')
         conn = mysql.connect()
@@ -37,11 +37,11 @@ def getSolicitud():
         data = cursor.fetchall()
 ```
 
-##Practicas de Clean Code Aplicadas  
+**Practicas de Clean Code Aplicadas**  
 Practica #1: Comentar y documentar
 Dirección: blogex
 ```
-#funcion para pasar una propuesta aceptada a un evento ascociando al encargado
+    #funcion para pasar una propuesta aceptada a un evento ascociando al encargado
     def convertir_a_evento(self,encargado):
         evento=Evento(self.id_propuesta,self.titulo,self.descripcion,encargado,self.tema)
         return evento
