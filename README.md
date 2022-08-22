@@ -106,6 +106,10 @@ def get_solicitud():
 **Practicas Solid Aplicadas**  
 1. Single Responsability Principle(SRP)
 ```
+#bad
+class Horario:
+    def __init__(self,dia,mes,año, hora, minuto):
+#good
 class Fecha:
     def __init__(self,dia,mes,año):
         ...
@@ -137,8 +141,27 @@ class Usuario_VIP(Usuario):
     ...
 ```
 
-3. Don't repeat yourself(DRY):
+3. Don't repeat yourself(DRY)
+
 ```
+#bad
+class Usuario:
+    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña):
+        self.id_usuario=id_usuario
+        self.nombre_completo=Nombre(nombre,apellido_paterno,apellido_materno)
+        self.correo=correo
+        self.telefono=telefono
+        self.usuario=usuario
+        self.contraseña=contraseña
+class Usuario_Normal(Usuario):
+    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,centro_estudios,usuario,contraseña):
+        self.id_usuario=id_usuario
+        self.nombre_completo=Nombre(nombre,apellido_paterno,apellido_materno)
+        self.correo=correo
+        self.telefono=telefono
+        self.centro_estudios=centro_estudios
+        self.usuario=usuario
+        self.contraseña=contraseña
 #good
 class Usuario:
     def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña):
@@ -151,7 +174,8 @@ class Usuario:
         
 
 class Usuario_Normal(Usuario):
-    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña):
+    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,centro_estudios,usuario,contraseña):
         super().__init__(id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña)
+        self.centro_estudios=centro_estudios
 
 ```
