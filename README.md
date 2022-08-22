@@ -102,3 +102,56 @@ def get_solicitud():
         cursor = conn.cursor()
         cursor.execute('SELECT id_solicitud,nombre,apellidoPaterno, apellidoMaterno, correo FROM Solicitudes;')
 ```
+  
+**Practicas Solid Aplicadas**  
+1. Single Responsability Principle(SRP)
+```
+class Fecha:
+    def __init__(self,dia,mes,año):
+        ...
+    
+    def get_fecha(self):
+        ...
+class Horario:
+    def __init__(self,hora,minuto):
+        ...
+    
+    def get_horario(self):
+        ...
+```
+  
+2. Dependency Inversion Principle(DIP)
+```
+#bad
+class Usuario_Normal:
+    ...
+class Usuario_VIP(Usuario_Normal):
+    ...
+
+#good
+class Usuario:
+    ...
+class Usuario_Normal(Usuario):
+    ...
+class Usuario_VIP(Usuario):
+    ...
+```
+
+3. Don't repeat yourself(DRY):
+```
+#good
+class Usuario:
+    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña):
+        self.id_usuario=id_usuario
+        self.nombre_completo=Nombre(nombre,apellido_paterno,apellido_materno)
+        self.correo=correo
+        self.telefono=telefono
+        self.usuario=usuario
+        self.contraseña=contraseña
+        
+
+class Usuario_Normal(Usuario):
+    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña):
+        super().__init__(id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña)
+
+```
