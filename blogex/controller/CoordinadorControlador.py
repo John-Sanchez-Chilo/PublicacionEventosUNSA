@@ -79,3 +79,6 @@ def validateLogin():
         return render_template('error.html', error = 'Usuario no existe')
     cursor.close()
     conn.close()
+
+if __name__ == "__main__":
+    app.run()
