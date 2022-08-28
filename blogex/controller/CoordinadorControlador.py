@@ -38,3 +38,44 @@ def get_solicitud():
         return json.dumps(solicitud_list)
     else:
         return render_template('error.html', error='Acceso no Autorizado')
+#Control de sesion
+@app.route('/usuarioNormal')
+def usuarioNormal():
+    if session.get('user'):
+        return render_template('usuarioNormal.html')
+    else:
+        return render_template('error.html',error = 'Acceso No Autorizado')
+
+@app.route('/usuarioVip')
+def usuarioVip():
+    if session.get('user'):
+        return render_template('usuarioVip.html')
+    else:
+        return render_template('error.html',error = 'Acceso No Autorizado')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect('/')
+
+@app.route('/validateLogin', methods = ['POST'])
+def validateLogin():
+    _username = request.form['inputEmail']
+    _password = request.form['inputPassword']
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.callproc('validarLogin',(_username,))#Llamamos al procedimiento validarLogin de nuestra base de datos
+    data = cursor.fetchall()#Obtenemos el resultado  en este caso una tabla
+    if len(data)>0:#Si la tabla no esta vacia
+        if str(data[0][7]) == _password:
+            session['user'] = data[0][0]#asignamos id_usuario
+            if data[0][8]:
+               return redirect('/usuarioNormal')
+            else: 
+                return redirect('/usuarioVip')
+        else:
+            return render_template('error.html', error='Usuario o contraseña es incorrecta')
+    else:
+        return render_template('error.html', error = 'Usuario no existe')
+    cursor.close()
+    conn.close()
