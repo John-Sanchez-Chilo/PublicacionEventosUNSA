@@ -195,6 +195,27 @@ class Usuario_Normal(Usuario):
 
 ```
 ## 6. Conceptos DDD aplicados  
+1. Entidades (Entities)  
+```
+#bad
+class Horario:
+    def __init__(self,dia,mes,año, hora, minuto):
+#good
+class Fecha:
+    def __init__(self,dia,mes,año):
+        ...
+    
+    def get_fecha(self):
+        ...
+class Horario:
+    def __init__(self,hora,minuto):
+        ...
+    
+    def get_horario(self):
+        ...
+```
+2. Objetos de valor (Object Values)  
 
+3. Modulos (Modules)  
 
 
