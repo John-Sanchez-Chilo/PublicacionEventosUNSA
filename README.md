@@ -1,43 +1,22 @@
 Sistema de Publicación de Eventos UNSA
 =================
+Integrantes:  
+- John Edson Sanchez Chilo  
+- Jheeremy Manuel Alvarez Astete
+- Diego Raul Rivas Huanca  
 
-Alumno: John Edson Sanchez Chilo  
-**Estilos de Programacion aplicados**  
+## 1. Proposito  
+Con el presente trabajo se busca crear un sistema de de gestión para la publicación de eventos. Como alumnos de Ciencia de la Computación entendemos la necesidad de estar actualizados con nuevas tecnologias, frameworks, lenguajes etc. y una forma profesional de hacerlo es asistiendo a eventos realcionados a nuestros campos de interes en los cuales se realizen conferencias, workshops, simposios, etc. Es así que el presente trabajo cumple la necesidad de gestionar los diferentes tipos de eventos.  
   
-Estilo #1:  Code-golf  
-Direccion: blogex/Controller/CoordinadorControlador.py 
-```
-@app.route("/")  
-def main():  
-    return render_template('coordinadorHome.html') 
-```
-
-Estilo #2:  CookBook
-Direccion: blogex/static/coordinadorHome.js
-```
-$.each(solicitudObj,function(index,value){
-    solicitud=$(div).clone();
-    $(solicitud).find('th').text(value.Id);
-    $(solicitud).find('td').text(value.Nombre);
-    $(solicitud).find('td').text(value.Correo);
-    $('.table_rows').append(solicitud);
- });
-```
-
-Estilo #3: Persistent Tables  
-Direccion: blogex/Controller/CoordinadorControlador.py
-
-```
-def get_solicitud():
-    if session.get('user'):
-        _user = session.get('user')
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        cursor.execute('SELECT id_solicitud,nombre,apellidoPaterno, apellidoMaterno, correo FROM Solicitudes;')
-        data = cursor.fetchall()
-```
-
-**Practicas de Clean Code Aplicadas**  
+## 2. Funcionalidades  
+- Se  ha implementado un index del cual los usuarios podran ver las opciones respecto a la página y visualizar eventos
+- Se tiene un registro de usuarios nuevos que quieren formar parte
+- Se tiene un inicio de sesión para ingresar a las cuenta personales de los usuarios
+- En las cuentas de los usuarios  se presenta la funcionalidad de Realizar Propuesta de Evento
+- En la parte de Coordinador se tiene la funcionalidad de Aceptar las Propuestas realizadas por parte de los usuarios y aceptarlas o denegarlas  
+  
+## 3. Practicas de Codigo Legible Aplicadas  
+  
 Practica #1: Comentar y documentar
 
 ```
@@ -67,6 +46,7 @@ def get_solicitud():
 def convertir_a_evento(self,encargado):
   ...
 ```
+
 Practica #4: Longitud de Linea Límite  
 
 ```
@@ -102,8 +82,43 @@ def get_solicitud():
         cursor = conn.cursor()
         cursor.execute('SELECT id_solicitud,nombre,apellidoPaterno, apellidoMaterno, correo FROM Solicitudes;')
 ```
+## 4. Estilos de programación aplicados  
   
-**Practicas Solid Aplicadas**  
+Estilo #1:  Code-golf  
+Direccion: blogex/Controller/CoordinadorControlador.py 
+```
+@app.route("/")  
+def main():  
+    return render_template('coordinadorHome.html') 
+```
+
+Estilo #2:  CookBook
+Direccion: blogex/static/coordinadorHome.js
+```
+$.each(solicitudObj,function(index,value){
+    solicitud=$(div).clone();
+    $(solicitud).find('th').text(value.Id);
+    $(solicitud).find('td').text(value.Nombre);
+    $(solicitud).find('td').text(value.Correo);
+    $('.table_rows').append(solicitud);
+ });
+```
+
+Estilo #3: Persistent Tables  
+Direccion: blogex/Controller/CoordinadorControlador.py
+
+```
+def get_solicitud():
+    if session.get('user'):
+        _user = session.get('user')
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute('SELECT id_solicitud,nombre,apellidoPaterno, apellidoMaterno, correo FROM Solicitudes;')
+        data = cursor.fetchall()
+```
+
+
+## 5. Principios SOLID aplicados  
 1. Single Responsability Principle(SRP)
 ```
 #bad
@@ -179,3 +194,7 @@ class Usuario_Normal(Usuario):
         self.centro_estudios=centro_estudios
 
 ```
+## 6. Conceptos DDD aplicados  
+
+
+
