@@ -3,7 +3,7 @@
 USE UNSA;
 #DROP FUNCTION esNormal;
 DELIMITER $$
-create definer=`root`@`localhost` function esNormal(
+create definer=`root`@`localhost` function esNormal(#0vip 1 normal 2administrador
 _id_usuario INT)RETURNS INT DETERMINISTIC
 begin
     DECLARE bandera BOOL;
@@ -12,10 +12,18 @@ begin
     SET bandera = (SELECT COUNT(c.id_usuario) FROM UsuarioNormal c 
         INNER JOIN  Usuario p WHERE c.id_usuario = _id_usuario AND p.id_usuario = c.id_usuario
         GROUP BY c.id_usuario);
-    IF bandera THEN
+    IF bandera THEN#ES USUARIO NORMAL
        SET aux = 1;
-	ELSE
-       SET aux = 0;
+	ELSE #vip o administrador
+		SET bandera = (SELECT COUNT(uv.id_usuario) FROM UsuarioVip uv 
+        INNER JOIN  Usuario p WHERE uv.id_usuario = _id_usuario AND p.id_usuario = uv.id_usuario
+        GROUP BY uv.id_usuario);
+        IF bandera THEN #ES USUARIO VIP
+			SET aux = 0;
+        ELSE #ES ADMINISTRADOR
+            SET aux = 2;
+        END IF;
+		
      END IF;
     
     RETURN aux;
@@ -36,10 +44,10 @@ create definer=`root`@`localhost` procedure validarLogin(
 IN n_usuario varchar(30))
 begin
     SELECT p.id_usuario id_usuario, p.Nombre Nombre, p.apellido_paterno, p.apellido_materno, 
-           p.Correo Correo,p.Telefono Telefono, p._usuario _usuario,
+           p.Correo Correo,p.Telefono Telefono, p.usuario _usuario,
            p.contrasena contra, esNormal(p.id_usuario) sies
 	FROM Usuario p INNER JOIN UsuarioNormal c
-    ON p._usuario = n_usuario;
+    ON p.usuario = n_usuario;
     
 end$$
 DELIMITER ;
@@ -48,9 +56,8 @@ USE UNSA;
 SELECT* FROM Usuario;
 SELECT* FROM UsuarioNormal;
 SELECT* FROM UsuarioVip;
-CALL validarLogin('usuarioDos');
+CALL validarLogin('usuarioUno');
 
-#Creacion de usuarios
 USE UNSA;
 #DROP PROCEDURE crearUsuario
 DELIMITER $$
@@ -76,7 +83,7 @@ end$$
 DELIMITER ;
 
 USE UNSA;
-SELECT* FROM usuario;
+SELECT* FROM Usuario;
 
 USE UNSA;
 CALL crearUsuario('usuarioTres','222','Juan','Perez','Rios','a@gmail.com','111111111','Matematica','jaansn');
