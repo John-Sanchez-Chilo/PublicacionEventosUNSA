@@ -35,7 +35,7 @@ DELIMITER $$
 create definer=`root`@`localhost` procedure validarLogin(
 IN n_usuario varchar(30))
 begin
-    SELECT p.id_usuario id_usuario, p.Nombre Nombre, p.ApellidoPaterno, p.ApellidoMaterno, 
+    SELECT p.id_usuario id_usuario, p.Nombre Nombre, p.apellido_paterno, p.apellido_materno, 
            p.Correo Correo,p.Telefono Telefono, p._usuario _usuario,
            p.contrasena contra, esNormal(p.id_usuario) sies
 	FROM Usuario p INNER JOIN UsuarioNormal c
