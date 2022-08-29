@@ -11,8 +11,8 @@ Con el presente trabajo se busca crear un sistema de de gestión para la publica
 ## 2. Funcionalidades  
 - Se  ha implementado un index del cual los usuarios podran ver las opciones respecto a la página y visualizar eventos
 - Se tiene un registro de usuarios nuevos que quieren formar parte
-- Se tiene un inicio de sesión para ingresar a las cuenta personales de los usuarios
-- En las cuentas de los usuarios  se presenta la funcionalidad de Realizar Propuesta de Evento
+- Se tiene un inicio de sesión para ingresar a las cuenta personales de los usuarios y no redirecciona si somos usuarios normales, vip o coordinador.
+- En las cuentas de los usuarios  se presenta la funcionalidad de Realizar Propuesta de Evento, y nos mostrara en tiempo real las propuestas del usuario que realizo o acaba de realizar.
 - En la parte de Coordinador se tiene la funcionalidad de Aceptar las Propuestas realizadas por parte de los usuarios y aceptarlas o denegarlas  
   
 ## 3. Practicas de Codigo Legible Aplicadas  
