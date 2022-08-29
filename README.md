@@ -75,12 +75,9 @@ var solicitud = '';
 Practica #5: Poner MAYUSCULAS las palabras reservadas de SQL  
 
 ```
-def get_solicitud():
-    if session.get('user'):
-        _user = session.get('user')
-        conn = mysql.connect()
+conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute('SELECT id_solicitud,nombre,apellidoPaterno, apellidoMaterno, correo FROM Solicitudes;')
+        cursor.callproc('SELECT * FROM Propuesta')
 ```
 ## 4. Estilos de programación aplicados  
   
