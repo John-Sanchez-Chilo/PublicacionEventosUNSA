@@ -52,7 +52,7 @@ def usuarioNormal():
         return render_template('error.html',error = 'Acceso No Autorizado')
     
 @app.route('/Coordinador')
-def usuarioNormal():
+def Coordinador():
     if session.get('user'):
         return render_template('Coordinador.html')
     else:
@@ -176,13 +176,38 @@ def addPropuesta():
 def showaddPropuesta():
     return render_template('addPropuesta.html')
 
+@app.route('/getTOTALPropuesta')
+def getTOTALPropuesta():
+    if session.get('user'):
+        _user = session.get('user')
+
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('SELECT * FROM Propuesta')
+        data = cursor.fetchall()
+        deseos_list = []
+        for deseo in data:
+            deseo_list = {
+                'Id': deseo[0],
+                'Titulo': deseo[1],#marca
+                'Tema': deseo[2],
+                'Descripcion': deseo[3],
+                'Tipo':deseo[4]}#precio
+            deseos_list.append(deseo_list)
+        return json.dumps(deseos_list)
+    else:
+        return render_template('error.html', error='Acceso no Autorizado')
+    cursor.close
+    conn.close
+
+
 @app.route('/delete/<string:id>', methods = ['POST','GET']) 
-def addPropuesta():
+def deletePropuesta():
     if session.get('user'):
         _id_propuesta = request.form['id_propuesta']
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute('DELETE * FROM horarios WHERE id_propuesta={}'.format(_id_propuesta))
+        cursor.execute('DELETE FROM Propuesta WHERE id_propuesta={}'.format(_id_propuesta))
         data = cursor.fetchall()
         if len(data) == 0:
             conn.commit()
