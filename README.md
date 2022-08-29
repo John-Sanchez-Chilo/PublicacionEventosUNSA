@@ -197,25 +197,53 @@ class Usuario_Normal(Usuario):
 ## 6. Conceptos DDD aplicados  
 1. Entidades (Entities)  
 ```
-#bad
-class Horario:
-    def __init__(self,dia,mes,año, hora, minuto):
-#good
-class Fecha:
-    def __init__(self,dia,mes,año):
+
+class Usuario:
+    def __init__(self,id_usuario,nombre,apellido_paterno,apellido_materno,correo,telefono,usuario,contraseña):
         ...
-    
-    def get_fecha(self):
+  
+class Evento():
+    def __init__(self,id_evento,titulo,tema,descripcion, id_encargado):
         ...
+
+class Propuesta(object):
+    def __init__(self,id_propuesta=None, titulo=None, descripcion=None, tema=None,):
+        ...
+
+class Coordinador:
+    def __init__(self,id_coordinador,nombre, especialidad):
+        ...
+        
 class Horario:
     def __init__(self,hora,minuto):
         ...
     
-    def get_horario(self):
-        ...
+
 ```
 2. Objetos de valor (Object Values)  
+```
 
+class Fecha:
+    def __init__(self,dia,mes,año):
+        ...
+
+class Horario:
+    def __init__(self,hora,minuto):
+        ...
+
+class Conferencia(Evento):
+    def __init__(self,id_evento,titulo,tema,descripcion, id_encargado,id_evento_conferencia,fecha_inicio, fecha_fin):
+        super().__init__(id_evento,titulo,tema,descripcion, id_encargado)
+        self.id_evento_conferencia = id_evento_conferencia
+        self.fecha_inicio = fecha_inicio
+        self.fecha_fin = fecha_fin
+        ...
+```
 3. Modulos (Modules)  
-
+Se ha realizado las division de modulos por sus dominios relacionados dividiendo en  
+- Agentes: Coordinador  
+- Evento: Evento, Workshop, Simposio, Conferencia
+- Propuesta: Propuesta
+- Usuario: USuario, UsuarioNormal, UsuarioVIP
+- Utildiad: Fecha, Horario
 
