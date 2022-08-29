@@ -47,7 +47,14 @@ def get_solicitud():
 @app.route('/usuarioNormal')
 def usuarioNormal():
     if session.get('user'):
-        return render_template('usuarioNormal.html')
+        return render_template('userHome.html')
+    else:
+        return render_template('error.html',error = 'Acceso No Autorizado')
+    
+@app.route('/Coordinador')
+def usuarioNormal():
+    if session.get('user'):
+        return render_template('Coordinador.html')
     else:
         return render_template('error.html',error = 'Acceso No Autorizado')
 
@@ -117,6 +124,76 @@ def signUp():
         return render_template('error.html', error='Ningun campo debe estar vacio')
     cursor.close()
     conn.close()
+    
+@app.route('/getPropuesta')
+def getPropuesta():
+    if session.get('user'):
+        _user = session.get('user')
+
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('obtenerPropuesta', (_user,))
+        data = cursor.fetchall()
+        deseos_list = []
+        for deseo in data:
+            deseo_list = {
+                'Id': deseo[0],
+                'Titulo': deseo[1],#marca
+                'Tema': deseo[2],
+                'Descripcion': deseo[3],
+                'Tipo':deseo[4]}#precio
+            deseos_list.append(deseo_list)
+        return json.dumps(deseos_list)
+    else:
+        return render_template('error.html', error='Acceso no Autorizado')
+    cursor.close
+    conn.close
+
+@app.route('/addPropuesta', methods=['POST'])
+def addPropuesta():
+    if session.get('user'):
+        _titulo = request.form['titulo']
+        _tema = request.form['tema']
+        _descripcion = request.form['descripcion']
+        _tipo = request.form['tipo']
+        _user = session.get('user')
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('agregarPropuesta', (_titulo,_tema,_descripcion,_tipo, _user))
+        data = cursor.fetchall()
+        if len(data) == 0:
+            conn.commit()
+            return redirect('usuarioNormal')
+        else:
+            return render_template('error.html', error='Un error detectado')
+
+    else:
+        return render_template('error.html', error='Acceso no Autorizado')
+    cursor.close
+    conn.close
+
+@app.route('/showaddPropuesta')
+def showaddPropuesta():
+    return render_template('addPropuesta.html')
+
+@app.route('/delete/<string:id>', methods = ['POST','GET']) 
+def addPropuesta():
+    if session.get('user'):
+        _id_propuesta = request.form['id_propuesta']
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute('DELETE * FROM horarios WHERE id_propuesta={}'.format(_id_propuesta))
+        data = cursor.fetchall()
+        if len(data) == 0:
+            conn.commit()
+            return redirect('Coordinador')
+        else:
+            return render_template('error.html', error='Un error detectado')
+
+    else:
+        return render_template('error.html', error='Acceso no Autorizado')
+    cursor.close
+    conn.close
 
 if __name__ == "__main__":
     app.run()
