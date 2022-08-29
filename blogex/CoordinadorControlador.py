@@ -74,10 +74,12 @@ def validateLogin():
     if len(data)>0:#Si la tabla no esta vacia
         if str(data[0][7]) == _password:
             session['user'] = data[0][0]#asignamos id_usuario
-            if data[0][8]:
+            if data[0][8]==1:
                return redirect('/usuarioNormal')
-            else: 
+            elif data[0][8]==0: 
                 return redirect('/usuarioVip')
+            else:
+                return redirect('/usuarioCoordinador')
         else:
             return render_template('error.html', error='Usuario o contraseña es incorrecta')
     else:
