@@ -87,3 +87,32 @@ SELECT* FROM Usuario;
 
 USE UNSA;
 CALL crearUsuario('usuarioTres','222','Juan','Perez','Rios','a@gmail.com','111111111','Matematica','jaansn');
+
+/*Obtener propuesta*/
+#DROP PROCEDURE obtenerPropuesta;
+USE UNSA;#
+DELIMITER $$
+create definer=`root`@`localhost` procedure obtenerPropuesta(
+IN _id_usuario integer)
+begin
+	select p.id_propuesta , p.titulo, p.tema, p.descripcion, p.tipo
+    from Usuario u inner join Propuesta p
+    on u.id_usuario=_id_usuario AND p.id_usuario_encargado = u.id_usuario;
+end$$
+DELIMITER ;
+
+#drop procedure agregarPropuesta;
+USE UNSA;
+DELIMITER $$
+create definer=`root`@`localhost` procedure agregarPropuesta(
+IN n_titulo VARCHAR(30) ,
+IN n_tema VARCHAR(30) ,
+IN n_descripcion VARCHAR(200) ,
+IN n_tipo VARCHAR(30) ,
+IN n_id_usuario_encargado INT)
+begin
+    insert into Propuesta(id_propuesta,titulo ,tema ,descripcion, tipo, id_usuario_encargado)
+    values(NULL,n_titulo,n_tema,n_descripcion,n_tipo,n_id_usuario_encargado);
+
+end$$
+DELIMITER ;
