@@ -82,7 +82,7 @@ conn = mysql.connect()
 ## 4. Estilos de programación aplicados  
   
 Estilo #1:  Code-golf  
-Direccion: blogex/Controller/CoordinadorControlador.py 
+
 ```
 @app.route("/")  
 def main():  
@@ -90,7 +90,7 @@ def main():
 ```
 
 Estilo #2:  CookBook
-Direccion: blogex/static/coordinadorHome.js
+
 ```
 $.each(solicitudObj,function(index,value){
     solicitud=$(div).clone();
@@ -102,7 +102,7 @@ $.each(solicitudObj,function(index,value){
 ```
 
 Estilo #3: Persistent Tables  
-Direccion: blogex/Controller/CoordinadorControlador.py
+
 
 ```
 def get_solicitud():
