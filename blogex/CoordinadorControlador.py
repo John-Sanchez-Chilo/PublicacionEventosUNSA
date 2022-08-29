@@ -86,7 +86,7 @@ def validateLogin():
             elif data[0][8]==0: 
                 return redirect('/usuarioVip')
             else:
-                return redirect('/usuarioCoordinador')
+                return redirect('/Coordinador')
         else:
             return render_template('error.html', error='Usuario o contraseña es incorrecta')
     else:
