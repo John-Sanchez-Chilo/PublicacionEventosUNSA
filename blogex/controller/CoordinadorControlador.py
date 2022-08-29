@@ -16,7 +16,7 @@ mysql.init_app(app)
 
 @app.route("/")
 def main():
-    return render_template('indexCoord.html')
+    return render_template('login.html')#indexCoord.html
 
 @app.route('/get_solicitud')
 def get_solicitud():
@@ -60,8 +60,8 @@ def logout():
 
 @app.route('/validateLogin', methods = ['POST'])
 def validateLogin():
-    _username = request.form['inputEmail']
-    _password = request.form['inputPassword']
+    _username = request.form['username']
+    _password = request.form['password']
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.callproc('validarLogin',(_username,))#Llamamos al procedimiento validarLogin de nuestra base de datos
