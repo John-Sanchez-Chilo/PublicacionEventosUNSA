@@ -19,6 +19,10 @@ mysql.init_app(app)
 def main():
     return render_template('login.html')
 
+@app.route('/showSignUp')
+def showSignUp():
+    return render_template('signup.html')
+
 @app.route('/get_solicitud')
 def get_solicitud():
     if session.get('user'):
@@ -78,6 +82,37 @@ def validateLogin():
             return render_template('error.html', error='Usuario o contraseña es incorrecta')
     else:
         return render_template('error.html', error = 'Usuario no existe')
+    cursor.close()
+    conn.close()
+
+@app.route('/signUp', methods = ['POST','GET'])
+def signUp():
+    _usuario = request.form['usuario']
+    _contrasena = request.form['contrasena']
+    _nombre = request.form['nombre']
+    _apellidoPaterno = request.form['apellidoPaterno']
+    _apellidoMaterno = request.form['apellidoMaterno']
+    _correo = request.form['correo']
+    _telefono = request.form['telefono']
+    _estudios = request.form['estudios']
+    _descripcion = request.form['descripcion']
+    if _usuario and _contrasena and _nombre and _apellidoPaterno and _apellidoMaterno and _correo and _telefono and _estudios and _descripcion:
+        conn = mysql.connect()
+        if (conn):
+            print("Conexion establecida")
+        else:
+            print("Conexion fallida")
+        cursor = conn.cursor()
+        cursor.callproc('crearUsuario',(_usuario, _contrasena, _nombre, _apellidoPaterno, _apellidoMaterno, _correo, _telefono, _estudios, _descripcion))
+        data = cursor.fetchall()
+        if len(data) ==0:
+            conn.commit()
+            print("Usuario fue creado!")
+            return json.dumps({'mensaje':'usuario fue creado!'})
+        else:
+            print({'error':str(data[0])})
+    else:
+        return json.dumps({'mensaje': 'Campos estan vacios!'})
     cursor.close()
     conn.close()
 
