@@ -106,13 +106,13 @@ def signUp():
         cursor.callproc('crearUsuario',(_usuario, _contrasena, _nombre, _apellidoPaterno, _apellidoMaterno, _correo, _telefono, _estudios, _descripcion))
         data = cursor.fetchall()
         if len(data) ==0:
-            conn.commit()
-            print("Usuario fue creado!")
-            return json.dumps({'mensaje':'usuario fue creado!'})
+            #conn.commit()
+            #print("Usuario fue creado!")
+            return render_template('correcto.html', _correcto='Usuario fue creado')
         else:
-            print({'error':str(data[0])})
+            return render_template('error.html', error='Usuario ya existe')
     else:
-        return json.dumps({'mensaje': 'Campos estan vacios!'})
+        return render_template('error.html', error='Ningun campo debe estar vacio')
     cursor.close()
     conn.close()
 
