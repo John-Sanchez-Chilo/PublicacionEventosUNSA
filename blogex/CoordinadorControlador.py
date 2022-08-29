@@ -3,6 +3,7 @@ from flaskext.mysql import MySQL
 
 
 app = Flask(__name__)
+app.debug = True
 mysql = MySQL()
 app.secret_key = 'secreto'
 #MySQL Configuracion
@@ -16,7 +17,7 @@ mysql.init_app(app)
 
 @app.route("/")
 def main():
-    return render_template('templates/login.html')#indexCoord.html
+    return render_template('login.html')
 
 @app.route('/get_solicitud')
 def get_solicitud():
@@ -82,3 +83,4 @@ def validateLogin():
 
 if __name__ == "__main__":
     app.run()
+    
