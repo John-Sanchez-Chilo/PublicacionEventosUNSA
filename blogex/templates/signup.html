@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link href="/static/css/signup.css" rel="stylesheet">
     <script src="/static/js/jquery-1.11.2.js"></script>
-    <script src="/static/js/signUp.js"></script>
+    
    
   </head>
 
@@ -28,7 +28,7 @@
 
       <div class="jumbotron">
         <h1>Completa el siguiente formulario</h1>
-        <form class="form-signin">
+        <form class="form-signin" action="/signUp" method="post">
         
         <label for="usuario" class="sr-only">Usuario</label>
         <input type="name" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required autofocus>
@@ -46,7 +46,7 @@
         <input type="name" name="apellidoMaterno" id="apellidoMaterno" class="form-control" placeholder="Apellido Materno" required autofocus>
 
         <label for="correo" class="sr-only">Correo</label>
-        <input type="name" name="correo" id="correo" class="form-control" placeholder="Correo" required autofocus>
+        <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" required autofocus>
 
         <label for="telefono" class="sr-only">Telefono</label>
         <input type="name" name="telefono" id="telefono" class="form-control" placeholder="Telefono" required autofocus>
@@ -57,7 +57,7 @@
         <label for="descripcion" class="sr-only">Descripcion</label>
         <input type="name" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required>
 
-        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Registrarse</button>
+        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
       </form>
       </div>
       <footer class="footer">
